@@ -1,0 +1,55 @@
+# docker compose -f CM-compose.yml up --detach
+# docker compose -f CM-compose.yml down
+services:
+  netatalk:
+    image: netatalk/netatalk:latest
+    network_mode: "host"
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ./afpshare:/mnt/afpshare
+      - ./afpbackup:/mnt/afpbackup
+      - /var/run/dbus:/var/run/dbus
+    environment:
+      - AFP_USER=morten
+      - AFP_PASS=Morten01
+      - AFP_GROUP=afpusers
+      - ATALKD_INTERFACE=wlp2s0
+      - TZ=Europe/Berlin
+      - SERVER_NAME=MVS
+      - SHARE_NAME=MVShare
+      - SHARE_NAME2=MVSTMC
+  macproxy:
+    image: "rdmark/macproxy"
+    container_name: "mproxy"
+    ports:
+      - "5000:5000"
+  stunnel:
+    container_name: stunnel
+    image: mhardingdk/mac:stunnel
+    restart: always
+    expose:
+      - "25"
+      - "110"
+      - "143"
+      - "5025"
+      - "5110"
+      - "5143"
+      - "6025"
+      - "6110"
+      - "6143"
+    volumes:
+      - "./stunnel.conf:/etc/stunnel/stunnel.conf"
+      - "./log:/etc/stunnel/log"
+    stdin_open: true
+    tty: true
+  vnc:
+    image: "mhardingdk/vnc-citrix"
+    container_name: "vnc"
+    ports:
+      - "6901:6901"
+      - "5901:5901"
+networks:
+  hostnet:
+    external: true
+    name: host
