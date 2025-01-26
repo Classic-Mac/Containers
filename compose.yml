@@ -40,6 +40,7 @@ services:
     volumes:
       - "./stunnel.conf:/etc/stunnel/stunnel.conf"
       - "./log:/etc/stunnel/log"
+      - "./certs:/etc/ssl/certs"
     stdin_open: true
     tty: true
   vnc:

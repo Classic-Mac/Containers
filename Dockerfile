@@ -12,7 +12,6 @@ EXPOSE 25 143 110 993 995 587 4025 4143 4110 5025 5143 5110 6025 6143 6110
 COPY stunnel.conf /etc/stunnel/stunnel.conf
 COPY run-stunnel.sh /usr/local/bin/run-stunnel.sh
 COPY stunnel.pem /etc/stunnel/stunnel.pem
-COPY stunnel.pem /etc/ssl/certs/stunnel.pem
 RUN chmod +x /usr/local/bin/run-stunnel.sh
 
 ENTRYPOINT [ "/bin/bash","/usr/local/bin/run-stunnel.sh" ]
