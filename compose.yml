@@ -27,17 +27,16 @@ services:
   stunnel:
     container_name: stunnel
     image: mhardingdk/mac:stunnel
-    restart: always
-    expose:
-      - "25"
-      - "110"
-      - "143"
-      - "5025"
-      - "5110"
-      - "5143"
-      - "6025"
-      - "6110"
-      - "6143"
+    ports:
+      - "25:25"
+      - "110:110"
+      - "143:143"
+      - "5025:5025"
+      - "5110:5110"
+      - "5143:5143"
+      - "6025:6025"
+      - "6110:6110"
+      - "6143:6143"
     volumes:
       - "./stunnel.conf:/etc/stunnel/stunnel.conf"
       - "./log:/etc/stunnel/log"
