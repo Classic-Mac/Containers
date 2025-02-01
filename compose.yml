@@ -38,9 +38,8 @@ services:
       - "6110:6110"
       - "6143:6143"
     volumes:
-      - "./stunnel.conf:/etc/stunnel/stunnel.conf"
+      - "./config:/etc/stunnel/config"
       - "./log:/etc/stunnel/log"
-      - "./certs:/etc/ssl/certs"
     stdin_open: true
     tty: true
   vnc:
