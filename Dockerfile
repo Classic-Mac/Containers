@@ -9,10 +9,8 @@ RUN apt-get update && apt-get install -y stunnel openssl locales \
 ENV LANG=en_US.utf8
 
 EXPOSE 25 143 110 993 995 587 4025 4143 4110 5025 5143 5110 6025 6143 6110
-COPY stunnel.conf /etc/stunnel/config/stunnel.conf
+COPY ./config /etc/stunnel/config
 COPY run-stunnel.sh /usr/local/bin/run-stunnel.sh
-COPY ./config/stunnel.pem /etc/stunnel/config/stunnel.pem
-COPY ./config/ca-certs.pem /etc/stunnel/config/ca-certs.pem
 RUN chmod +x /usr/local/bin/run-stunnel.sh
 
 ENTRYPOINT [ "/bin/bash","/usr/local/bin/run-stunnel.sh" ]
