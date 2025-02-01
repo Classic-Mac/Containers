@@ -1,3 +1,3 @@
 #!/bin/sh
 
-stunnel /etc/stunnel/stunnel.conf
+stunnel /etc/stunnel/config/stunnel.conf
